@@ -3,6 +3,8 @@ package org.example.springbootdeveloper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TestService {
 
@@ -10,6 +12,6 @@ public class TestService {
     private MemberRepository memberRepository;
 
     public List<Member> getAllMembers() {
-        return memberRepository
+        return memberRepository.findAll();
     }
 }
