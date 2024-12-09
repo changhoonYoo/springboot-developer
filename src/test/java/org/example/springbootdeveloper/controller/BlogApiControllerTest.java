@@ -13,10 +13,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc // MockMvc 생성 및 자동 구성
@@ -50,12 +55,17 @@ class BlogApiControllerTest {
 
         // when
         // 요청 전송
-        ResultActions result = mockMvc.perform(post(url
+        ResultActions result = mockMvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(requestBody));
 
-        result.andExpect(status().isCreated());
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isCreated());
 
-        List<Article>
+        List<Article> articles = blogRepository.findAll();
+
+        assertThat(articles).hasSize(1); // 크기가 1인지 검증
+        assertThat(articles.get(0).getTitle()).isEqualTo(title);
+        assertThat(articles.get(0).getContent()).isEqualTo(content);
     }
 }
