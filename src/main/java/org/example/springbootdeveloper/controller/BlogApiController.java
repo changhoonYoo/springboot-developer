@@ -1,5 +1,7 @@
 package org.example.springbootdeveloper.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.springbootdeveloper.domain.Article;
 import org.example.springbootdeveloper.dto.AddArticleRequest;
@@ -14,11 +16,13 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@Tag(name = "Blog API", description = "Manage Article")
 public class BlogApiController {
 
     private final BlogService blogService;
 
     @PostMapping("/api/articles")
+    @Operation(summary = "Add Article", description = "블로그 글 추가")
     public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
         Article savedArticle = blogService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED)

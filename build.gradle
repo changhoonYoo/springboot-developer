@@ -25,6 +25,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
+    implementation 'org.glassfish:jakarta.el:4.0.2' // EL(Expression Language) 의존성 추가 (필요 시)
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+
 }
 
 test {

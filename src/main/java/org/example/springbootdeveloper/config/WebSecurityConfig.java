@@ -32,7 +32,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests() // 인증, 인가 설정
-                .requestMatchers("/login", "/signup", "/user").permitAll() // 특정 요청과 일치하는 url에 대한 엑세스 설정 (누구나 접근 가능)
+                .requestMatchers("/login", "/signup", "/user", "/swagger-ui.html",  // Swagger UI 메인 페이지
+                        "/swagger-ui/**",    // Swagger UI 리소스
+                        "/v3/api-docs/**").permitAll() // 특정 요청과 일치하는 url에 대한 엑세스 설정 (누구나 접근 가능)
                 .anyRequest().authenticated() // 위 설정 url 이외의 요청에 대한 설정 (인가는 필요하지 않지만, 인증이 성공된 상태여야 접근)
                 .and()
                 .formLogin() // 폼 기반 로그인 설정
