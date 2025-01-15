@@ -30,6 +30,10 @@ dependencies {
     implementation 'org.glassfish:jakarta.el:4.0.2' // EL(Expression Language) 의존성 추가 (필요 시)
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.projectlombok:lombok'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1' // 자바 JWT 라이브러리
+    implementation 'javax.xml.bind:jaxb-api:2.3.1' // XML 문서와 자바객체간의 매핑 자동화
 }
 
 test {
