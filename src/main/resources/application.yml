@@ -22,6 +22,6 @@ spring:
     swagger-ui:
       path: /swagger-ui.html
 
-  jwt:
-    issuer: test@gmail.com
-    secret_key: study-springboot
+jwt:
+  issuer: test@gmail.com
+  secret_key: study-springboot
