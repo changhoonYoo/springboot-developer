@@ -1,5 +1,7 @@
 package org.example.springbootdeveloper.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
 @Controller
+@Tag(name = "User API", description = "Manage User")
 public class UserApiController {
 
     private final UserService userService;
 
+    @Operation(summary = "sign up", description = "회원가입")
     @PostMapping("/user")
     public String signup(AddUserRequest request) {
         userService.save(request);
