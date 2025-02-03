@@ -2,6 +2,8 @@ package org.example.springbootdeveloper.config;
 
 import lombok.RequiredArgsConstructor;
 import org.example.springbootdeveloper.config.jwt.TokenProvider;
+import org.example.springbootdeveloper.config.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import org.example.springbootdeveloper.config.oauth.OAuth2SuccessHandler;
 import org.example.springbootdeveloper.config.oauth.OAuth2UserCustomService;
 import org.example.springbootdeveloper.domain.repository.RefreshTokenRepository;
 import org.example.springbootdeveloper.service.UserService;
@@ -16,7 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
@@ -49,7 +50,7 @@ public class WebOAuthSecurityConfig {
         // 헤더를 확인할 커스텀 필터 추가
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        // 토큰 재발급 URL은 인증 없이 접근 가능하도록 설정. 나머지 API URL은 인증 필요
+        // 토큰 재발급 URL 은 인증 없이 접근 가능하도록 설정. 나머지 API URL은 인증 필요
         http.authorizeHttpRequests()
                 .requestMatchers("/api/token").permitAll()
                 .requestMatchers("/api/**").authenticated()
